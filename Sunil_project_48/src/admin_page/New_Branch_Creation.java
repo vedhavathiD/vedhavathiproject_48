@@ -19,6 +19,8 @@ public class New_Branch_Creation {
 		PageFactory.initElements(driver, this);
 		driver.get(url);
 	}
+	@FindBy(xpath = "//input[@id='BtnNewBR']")
+	public WebElement New_Branch;
 	
 	@FindBy(xpath = "//input[@id='txtbName']")
 	public WebElement Branch_Name;
@@ -37,14 +39,14 @@ public class New_Branch_Creation {
 	
 	@FindBy(xpath = "//input[@id='txtZip']")
 	public WebElement Zip_Code;
-	
-	@FindBy(xpath = "//select[@id='lst_countryS']")
+
+	@FindBy(xpath = "//select[@name='lst_counrtyU']")
 	public WebElement Select_Country_Name;
 	
-	@FindBy(xpath = "//select[@id='lst_stateS']")
+	@FindBy(xpath = "//select[@name='lst_stateI']")
 	public WebElement Select_StateName;
 	
-	@FindBy(xpath = "//select[@id='lst_cityS']")
+	@FindBy(xpath = "//select[@name='lst_cityI']")
 	public WebElement Select_City_Name;
 	
 	@FindBy(xpath = "//input[@id='BtnSubmit']")
@@ -62,6 +64,10 @@ public class New_Branch_Creation {
 		boolean flag=Runtime_title.contains(title);
 		return flag;
 	}
+	public void Click_on_New_Branch()
+	{
+		New_Branch.click();
+		}
 	public void Type_Branch_Name(String name)
 	{
 		Branch_Name.clear();
@@ -100,15 +106,15 @@ public class New_Branch_Creation {
 	
 	public void Select_Country_dropdown(String Country_Name)
 	{
-		new Select(driver.findElement(By.id("Country"))).selectByVisibleText(Country_Name);
+		new Select(Select_Country_Name).selectByVisibleText(Country_Name);
 	}
 	public void Select_State_dropdown(String State_Name)
 	{
-		new Select(driver.findElement(By.id("State"))).selectByVisibleText(State_Name);
+		new Select(Select_StateName).selectByVisibleText(State_Name);
 	}
 	public void Select_City_dropdown(String City_Name)
 	{
-		new Select(driver.findElement(By.id("City"))).selectByVisibleText(City_Name);
+		new Select(Select_City_Name).selectByVisibleText(City_Name);
 	}
 	public void Click_on_Submit_btn()
 	{
@@ -123,5 +129,22 @@ public class New_Branch_Creation {
 	{
 		Cancel_btn.click();
 	}
-
+	
+	
+	public boolean is_AlertPresent() {
+		try {
+			driver.switchTo().alert();
+			return true;
+		}
+		catch(Exception e) {
+		return false;
+	}
+	
+	}
+	public void else_Alert() {
+		if(is_AlertPresent())
+			driver.switchTo().alert().accept();
+		else
+		System.out.println("alert not presented");
+	}
 }

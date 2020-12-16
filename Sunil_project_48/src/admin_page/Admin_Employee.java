@@ -20,10 +20,10 @@ public class Admin_Employee {
     @FindBy(xpath="//a[@href='adminflow.aspx']")
 	public WebElement new_Employee;
 	
-	@FindBy(xpath = "(//td[contains(.,'Edit')])[2]")
-	public WebElement Edit_btn;
+    @FindBy(xpath = "(//img[@src='images/b-edit.png'])[1]")
+	public WebElement Edit_button;
 	
-	@FindBy(xpath = "(//td[contains(.,'Del')])[2]")
+    @FindBy(xpath = "(//img[@border='0'])[8]")
 	public WebElement Delete_btn;
 	
 	public boolean Is_Ranford_Employeepage_Opened()
@@ -39,11 +39,28 @@ public class Admin_Employee {
 		
 		public void Click_on_Edit_btn()
 		{
-			 Edit_btn.click();
+			 Edit_button.click();
 		}
 		public void Click_on_Delete_btn()
 		{
 			 Delete_btn.click();
 		}
-	
+		public boolean is_AlertPresent() {
+			try {
+				driver.switchTo().alert();
+				return true;
+			}
+			catch(Exception e) {
+			return false;
+		}
+		
+		}
+		public void else_Alert() {
+
+			if(is_AlertPresent())
+				driver.switchTo().alert().accept();
+			else
+				System.out.println("Alert not presented");
+				}
+			
 }

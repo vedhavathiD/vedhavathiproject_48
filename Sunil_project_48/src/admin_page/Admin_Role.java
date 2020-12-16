@@ -19,10 +19,10 @@ public class Admin_Role {
 	@FindBy(xpath = "//input[@id='btnRoles']")
 	public WebElement New_Role;
 		
-	@FindBy(xpath = "(//td[contains(.,'Edit')])[2]")
+	@FindBy(xpath = "(//img[contains(@border,'0')])[8]")
 	public WebElement Edit_btn;
 	
-	@FindBy(xpath = "(//td[contains(.,'Delete')])[2]")
+	@FindBy(xpath = "(//img[@border='0'])[9]")
 	public WebElement Delete_btn;
 	
 	public boolean Is_Ranford_Rolepage_Opened()
@@ -44,6 +44,24 @@ public class Admin_Role {
 		{
 			 Delete_btn.click();
 		}
+		public boolean is_AlertPresent() {
+			try {
+				driver.switchTo().alert();
+				return true;
+			}
+			catch(Exception e) {
+			return false;
+		}
+		
+		}
+		public void else_Alert() {
+
+			if(is_AlertPresent())
+				driver.switchTo().alert().accept();
+			else
+				System.out.println("Alert not presented");
+			}
+		
+		}
 	
 
-}

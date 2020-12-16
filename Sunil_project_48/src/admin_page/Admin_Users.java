@@ -18,14 +18,14 @@ public class Admin_Users {
 		PageFactory.initElements(driver, this);
 		driver.get(url);
 	}
-	@FindBy(xpath = "//input[@id='Btnuser']")
+	@FindBy(xpath = "(//input[contains(@border,'0')])[1]")
 	public WebElement New_User;
 	
 	@FindBy(xpath = "//select[@id='lst_branchS']")
-	public WebElement Branch_Name;
+	public WebElement Select_Branch_Name;
 	
 	@FindBy(xpath = "//select[@id='lst_rolesS']")
-	public WebElement Roles;
+	public WebElement Select_Roles;
 	
 	@FindBy(xpath = "//input[@id='btn_search']")
 	public WebElement Search_btn;
@@ -33,7 +33,7 @@ public class Admin_Users {
 	@FindBy(xpath = "//input[@id='btn_clear']")
 	public WebElement Clear_btn;
 	
-	@FindBy(xpath = "(//td[contains(.,'Edit')])[2]")
+	@FindBy(xpath = "(//img[@border='0'])[8]")
 	public WebElement Edit;
 	
 	@FindBy(xpath = "(//td[contains(.,'Delete')])[2]")
@@ -51,11 +51,11 @@ public class Admin_Users {
 	}
 	public void Select_Branch_dropdown()
 	{
-		new Select(driver.findElement(By.id("Branch"))).selectByVisibleText("All");
+		new Select(Select_Branch_Name).selectByVisibleText("All");
 	}
 	public void Select_Role_dropdown()
 	{
-		new Select(driver.findElement(By.id("Role"))).selectByVisibleText("All");
+		new Select(Select_Roles).selectByVisibleText("All");
 	}
 
 	public void Click_on_Search_btn()
@@ -78,9 +78,26 @@ public class Admin_Users {
 	
 	
 	
+	public boolean is_AlertPresent() {
+		try {
+			driver.switchTo().alert();
+			return true;
+		}
+		catch(Exception e) {
+		return false;
+	}
 	
+	}
+	public void else_Alert() {
+
+		if(is_AlertPresent())
+			driver.switchTo().alert().accept();
+		else
+			System.out.println("Alert not presented");
+		}
+	
+	}
 	
 	
 	
 
-}

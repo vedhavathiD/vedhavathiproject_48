@@ -18,7 +18,10 @@ public class New_Employee_Creation {
 		PageFactory.initElements(driver, this);
 		driver.get(url);
     }
-	@FindBy(xpath = "//input[@id='txtUname']")
+	@FindBy(xpath = "//input[@id='BtnNew']")
+		public WebElement new_Employee;
+	 
+	 @FindBy(xpath = "//input[@name='txtUname']")
 	public WebElement Employee_Username;
 	
 	@FindBy(xpath = "//input[@id='txtLpwd']")
@@ -46,7 +49,11 @@ public class New_Employee_Creation {
 		return flag;
 	}
 	
-		
+		public void Click_on_new_Employee()
+		{
+			new_Employee.click();
+		}
+			
 		public void Type_Employee_Username(String username)
 		{
 			Employee_Username.clear();
@@ -60,11 +67,11 @@ public class New_Employee_Creation {
 		}
 		public void Select_Role_dropdown(String role_name)
 		{
-		new Select(driver.findElement(By.id("Role"))).selectByVisibleText(role_name);
+		new Select(Select_Role).selectByVisibleText(role_name);
 		}
 		public void Select_Branch_dropdown(String Branch_Name)
 		{
-		new Select(driver.findElement(By.id("Branch"))).selectByVisibleText(Branch_Name);
+		new Select(Select_Branch).selectByVisibleText(Branch_Name);
 		}
 		
 		public void Click_on_Submit_btn()
@@ -80,5 +87,24 @@ public class New_Employee_Creation {
 		{
 			Cancel_btn.click();
 		}
+		public boolean is_AlertPresent() {
+			try {
+				driver.switchTo().alert();
+				return true;
+			}
+			catch(Exception e) {
+			return false;
+		}
+		
+		}
+		public void else_Alert() {
 
-}
+			if(is_AlertPresent())
+				driver.switchTo().alert().accept();
+			else
+				System.out.println("Alert not presented");
+			}
+		
+		}
+
+

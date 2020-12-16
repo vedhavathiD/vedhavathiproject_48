@@ -1,4 +1,4 @@
-package web_pages;
+package admin_page;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -6,11 +6,12 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
 public class RanfordHomePage {
-    	WebDriver driver;
+
+		WebDriver driver;
 	    private String url="http://122.175.8.158/Ranford2/";
 	    private String title="MINDQ RANFORD BANK";
-			
-		
+	    public String username="Admin";
+		public String password="Admin";
 			public RanfordHomePage(WebDriver driver)
 			{
 				this.driver=driver;
@@ -77,7 +78,12 @@ public class RanfordHomePage {
 			public WebElement Disclaimer;
 			
 			@FindBy(xpath = "//a[@href='sitemap.html']")
-			public WebElement Site_Map;
+			public WebElement sitemap;
+			
+			@FindBy(xpath = "//select[contains(@id,'drlist')]")
+			public WebElement branch_Dropdown;
+			
+		
 			
 			public boolean Is_Ranford_Homepage_Opened()
 			{
@@ -88,6 +94,13 @@ public class RanfordHomePage {
 			public void Click_on_Home_btn()
 			{
 				Home_btn.click();
+			}
+			
+
+			public void Click_login_btn()
+			{
+				Login_btn.click();
+				
 			}
 			public void Type_Admin_Banker_username(String username)
 			{
@@ -100,13 +113,8 @@ public class RanfordHomePage {
 				Admin_Banker_password.clear();
 				Admin_Banker_password.sendKeys(password);
 			}
-
-
-			public void Click_login_btn()
-			{
-				Login_btn.click();
-				
-			}
+		
+			
 			public void Click_on_Personal_banking_btn()
 			{
 				Personal_Banking_btn.click();
@@ -169,7 +177,27 @@ public class RanfordHomePage {
 			}
 			public void Click_on_Site_Map()
 			{
-				Site_Map.click();
+				sitemap.click();
 			}
+			public boolean is_AlertPresent() {
+				try {
+					driver.switchTo().alert();
+					return true;
+				}
+				catch(Exception e) {
+				return false;
+			}
+			
+			}
+			public void else_Alert() {
+
+				if(is_AlertPresent())
+					driver.switchTo().alert().accept();
+				else
+					System.out.println("Alert not presented");
+				}
+			
+			}
+
+
 		
-}

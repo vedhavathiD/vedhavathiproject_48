@@ -1,3 +1,4 @@
+
 package admin_page;
 
 import org.openqa.selenium.By;
@@ -36,12 +37,18 @@ public class Admin_Branch {
 	@FindBy(xpath = "//input[@id='btn_clsearch']")
 	public WebElement Clear_btn;
 		
-	@FindBy(xpath = "(//td[contains(.,'Edit')])[2]")
+	@FindBy(xpath = "(//img[@border='0'])[8]")
 	public WebElement Edit;
-	
-	@FindBy(xpath = "(//td[contains(.,'Delete')])[2]")
+	@FindBy(xpath = "//input[@name='btnupdate']")
+	public WebElement update;
+	@FindBy(xpath = "//span[contains(.,'Branch Updation')]")
+	public WebElement Branch_Updation;
+	@FindBy(xpath = "//input[@name='btnupdate']")
+	public WebElement update_btn;
+	@FindBy(xpath = "(//img[@border='0'])[9]")
 	public WebElement Delete;
-	public boolean Is_Ranford_Employeepage_Opened()
+
+	public boolean Is_Ranford_Branchpage_Opened()
 	{
 		String Runtime_title=driver.getTitle();
 		boolean flag=Runtime_title.contains(title);
@@ -51,17 +58,17 @@ public class Admin_Branch {
 	{
 		New_Branch.click();
 	}
-	public void Select_Country_dropdown()
+	public void Select_Country_dropdown(String Country_Name)
 	{
-		new Select(driver.findElement(By.id("Country"))).selectByVisibleText("All");
+		new Select(Select_Country_Name).selectByVisibleText(Country_Name);
 	}
-	public void Select_State_dropdown()
+	public void Select_State_dropdown(String State_Name)
 	{
-		new Select(driver.findElement(By.id("State"))).selectByVisibleText("All");
+		new Select(Select_StateName).selectByVisibleText(State_Name);
 	}
-	public void Select_City_dropdown()
+	public void Select_City_dropdown(String City_Name)
 	{
-		new Select(driver.findElement(By.id("City"))).selectByVisibleText("All");
+		new Select(Select_City_Name).selectByVisibleText(City_Name);
 	}
 	public void Click_on_Search_btn()
 	{
@@ -76,6 +83,14 @@ public class Admin_Branch {
 	{
 		 Edit.click();
 	}
+	public void Click_on_update()
+	{
+		update.click();
+	}
+	public void Click_on_update_btn()
+	{
+		update_btn.click();
+	}
 	public void Click_on_Delete_btn()
 	{
 		 Delete.click();
@@ -83,6 +98,23 @@ public class Admin_Branch {
 	
 	
 	
+	public boolean is_AlertPresent() {
+		try {
+			driver.switchTo().alert();
+			return true;
+		}
+		catch(Exception e) {
+		return false;
+	}
+	
+	}
+	public void else_Alert() {
+
+		if(is_AlertPresent())
+			driver.switchTo().alert().accept();
+		else
+			System.out.println("Alert not presented");
+		}
 	
 	
 	

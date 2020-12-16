@@ -1,5 +1,6 @@
 package admin_page;
 
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -10,34 +11,32 @@ import org.openqa.selenium.support.ui.Select;
 public class New_User_Creation {
 	
 	WebDriver driver;
-	private String url="22.175.8.158/Ranford21/userdetails.aspx";
-    private String title="AdminUserCreation";
 	public New_User_Creation(WebDriver driver)
 	{
 		this.driver=driver;
 		PageFactory.initElements(driver, this);
-		driver.get(url);
+		
 	}
 	@FindBy(xpath = "//select[@id='lst_Roles']")
-	public WebElement Role;
+	public WebElement Select_Role;
 	
 	@FindBy(xpath = "//select[@id='lst_Branch']")
-	public WebElement Branch;
+	public WebElement Select_Branch;
 	
 	@FindBy(xpath = "//select[@id='DrCName']")
 	public WebElement Customer_ID;
 	
 	@FindBy(xpath = "(//input[@type='text'])[1]")
-	public WebElement Customer_Name;
+	public WebElement Enter_Customer_Name;
 	
 	@FindBy(xpath = "//input[@id='txtUname']")
-	public WebElement UserName;
+	public WebElement Enter_UserName;
 	
 	@FindBy(xpath = "//input[@id='txtLpwd']")
-	public WebElement Password;
+	public WebElement Enter_Password;
 	
 	@FindBy(xpath = "//input[@id='txtTpwd']")
-	public WebElement Transaction_Password;
+	public WebElement Enter_Transaction_Password;
 	
 	@FindBy(xpath = "//input[@id='BtnSubmit']")
 	public WebElement Submit_btn;
@@ -48,61 +47,59 @@ public class New_User_Creation {
 	@FindBy(xpath = "//input[@id='btnCancel']")
 	public WebElement Cancel_btn;
 	
-	public boolean Is_Ranford_New_Userpage_Opened()
+	public void Select_Select_Role(String role_name)
 	{
-		String Runtime_title=driver.getTitle();
-		boolean flag=Runtime_title.contains(title);
-		return flag;
+		new Select(driver.findElement(By.id("lst_Roles"))).selectByVisibleText(role_name);
 	}
-	 public void Select_Role_dropdown(String Role_Name)
+	public void Select_Select_Branch(String branch)
+	{
+		new Select(driver.findElement(By.id("lst_Branch"))).selectByVisibleText(branch);
 
-		{
-			new Select(driver.findElement(By.id("Role"))).selectByVisibleText("Role_Name");
-		}
-	 public void Select_Branch_dropdown(String Branch_Name)
-		{
-			new Select(driver.findElement(By.id("Branch"))).selectByVisibleText(Branch_Name);
-		}
-	 public void Select_Customer_ID_dropdown(String Customer_ID )
-		{
-			new Select(driver.findElement(By.id("Cusomer_ID"))).selectByVisibleText(Customer_ID );
-		}
+	}
+	public void Select_Customer_ID(String cust_ID)
+	{
+		new Select(driver.findElement(By.id("DrCName"))).selectByVisibleText(cust_ID);
+	}
+	public void Type_Enter_Customer_Name(String cust_name)
+	{
+		Enter_Customer_Name.clear();
+		Enter_Customer_Name.sendKeys(cust_name);
+	}
+	public void Type_Enter_UserName(String username)
+	{
+		Enter_UserName.clear();
+		Enter_UserName.sendKeys(username);
+	}
+	public void Type_Enter_Password(String pwd)
+	{
+		Enter_Password.clear();
+		Enter_Password.sendKeys(pwd);
+	}
+	public void Type_Enter_Transaction_Password(String transaction_pwd)
+	{
+		Enter_Transaction_Password.clear();
+		Enter_Transaction_Password.sendKeys(transaction_pwd);
+	}
 	
-		public void Type_Customer_Name(String name)
-		{
-			Customer_Name.clear();
-			Customer_Name.sendKeys(name);
-		}
-		public void Type_UserName(String username)
-		{
-			UserName.clear();
-			UserName.sendKeys(username);
-		}
-
-		public void Type_Password(String password)
-		{
-			Password.clear();
-			Password.sendKeys(password);
-		}
-
-
-		public void Type_Transaction_Password(String password)
-		{
-			Transaction_Password.clear();
-			Transaction_Password.sendKeys(password);
-		}
-
-	 public void Click_on_Submit_btn()
-		{
-			 Submit_btn.click();
-		}
-		public void Click_on_Reset_btn()
-		{
-			 Reset_btn.click();
-		}
-
-		public void Click_on_Cancel_btn()
-		{
-			Cancel_btn.click();
-		}
+	public void Click_On_Submit_btn()
+	{
+		Submit_btn.click();
+	}
+	public void Click_On_Reset_btn()
+	{
+		Reset_btn.click();
+	}
+	public void Click_On_Cancel_btn()
+	{
+		Cancel_btn.click();
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
 }
